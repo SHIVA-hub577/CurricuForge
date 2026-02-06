@@ -1,20 +1,113 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+📘 CurricuForge – AI-Powered Curriculum Generator
 
-# Run and deploy your AI Studio app
+CurricuForge is a modern AI-powered curriculum generation platform that helps users create structured learning paths, syllabi, and course outlines using Google Gemini AI.
+Built with Vite + JavaScript (frontend) and designed for speed, simplicity, and scalability.
 
-This contains everything you need to run your app locally.
+🚀 Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1X0sez8nGshsnQGDiOwHavX-8sreawDa0
+🤖 AI Curriculum Generation using Gemini API
 
-## Run Locally
+📚 Generate structured course modules & learning outcomes
 
-**Prerequisites:**  Node.js
+⚡ Fast frontend powered by Vite
+
+🎨 Clean & responsive UI
+
+🔐 Secure API key handling using environment variables
+
+🌐 Web-based platform (no installation needed for users)
+
+🛠️ Tech Stack
+Layer	Technology
+Frontend	Vite, HTML, CSS, JavaScript
+AI Model	Google Gemini API
+Environment	Node.js
+Version Control	Git & GitHub
+📂 Project Structure
+CurricuForge/
+│
+├── public/                # Static assets
+├── src/
+│   ├── components/        # UI components
+│   ├── services/          # API integration
+│   ├── styles/            # CSS files
+│   └── main.js             # App entry point
+│
+├── .env                   # Environment variables (not committed)
+├── .gitignore
+├── index.html
+├── package.json
+└── README.md
+
+🔑 Environment Setup (IMPORTANT)
+
+Create a .env file in the root folder:
+
+VITE_GEMINI_API_KEY=your_api_key_here
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+⚠️ Do NOT add semicolons
+⚠️ Do NOT commit .env to GitHub
+
+Make sure .env is added to .gitignore.
+
+🧠 Using Gemini API in Vite
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+
+Vite only exposes environment variables prefixed with VITE_.
+
+▶️ How to Run the Project
+1️⃣ Clone the repository
+git clone https://github.com/your-username/CurricuForge.git
+
+2️⃣ Navigate to project folder
+cd CurricuForge
+
+3️⃣ Install dependencies
+npm install
+
+4️⃣ Start development server
+npm run dev
+
+
+The app will run on:
+
+http://localhost:5173
+
+📦 Build for Production
+npm run build
+
+
+Output will be generated inside the dist/ folder.
+
+🔐 Security Best Practices
+
+❌ Never expose API keys in frontend code
+
+❌ Never push .env files to GitHub
+
+✅ Restrict Gemini API key in Google Cloud Console
+
+✅ Use backend proxy (Flask / Node) for production apps
+
+📌 Future Enhancements
+
+🔐 User authentication
+
+📄 PDF curriculum export
+
+🧾 Save & manage generated curricula
+
+🧠 Multi-model AI support
+
+🌍 Cloud deployment
+
+👨‍💻 Author
+
+Shiva
+📧 Email: shivadashmisthry26@gmail.com
+
+⭐ Support
+
+If you like this project, please ⭐ star the repository and share it!
