@@ -1,0 +1,5 @@
+{
+  "name": "CurricuForge",
+  "description": "An AI-powered curriculum generator that creates industry-aligned, OBE-compliant curricula for various durations including days, weeks, months, and semesters.",
+  "requestFramePermissions": []
+}
