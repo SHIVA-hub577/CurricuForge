@@ -1,113 +1,50 @@
-📘 CurricuForge – AI-Powered Curriculum Generator
 
-CurricuForge is a modern AI-powered curriculum generation platform that helps users create structured learning paths, syllabi, and course outlines using Google Gemini AI.
-Built with Vite + JavaScript (frontend) and designed for speed, simplicity, and scalability.
+# ⚒️ CurricuForge AI
 
-🚀 Features
+CurricuForge is a high-performance, AI-powered curriculum generator designed to bridge the gap between academic theory and industry requirements. Using **Google Gemini AI**, it crafts highly structured, OBE-compliant (Outcome Based Education) learning pathways tailored to specific durations and target audiences.
 
-🤖 AI Curriculum Generation using Gemini API
+## 🚀 Tech Stack
 
-📚 Generate structured course modules & learning outcomes
+### Frontend
+- **React 19**: Utilizing the latest React features for a responsive and performant UI.
+- **TypeScript**: Ensuring type safety across the entire application domain.
+- **Tailwind CSS**: For high-end, custom "Glassmorphism" aesthetics and dark-mode optimization.
+- **Vite**: Modern frontend build tool for rapid development and optimized production bundles.
 
-⚡ Fast frontend powered by Vite
+### AI Engine
+- **Google Gemini API (@google/genai)**: Powering both the curriculum synthesis and the automated pedagogical assessment (Quiz) generation.
+- **Prompt Engineering**: Custom system instructions to ensure industry alignment and OBE outcome mapping.
 
-🎨 Clean & responsive UI
+### Utilities
+- **jsPDF & jsPDF-Autotable**: For high-quality document generation, allowing users to export their learning pathways to PDF.
+- **LocalStorage API**: For persistent user sessions and curriculum history (forged archive).
 
-🔐 Secure API key handling using environment variables
+## ✨ Key Features
 
-🌐 Web-based platform (no installation needed for users)
+- **Role-Based Access Control**:
+  - **Teachers**: Can generate curricula, create pedagogical assessments (quizzes), and review student readiness goals.
+  - **Students**: Can generate pathways and access curated learning resources (YouTube, articles, documentation) without seeing teacher-only assessments.
+- **Structured Pathways**: Organizes learning into Periods (Days, Weeks, Months, Semesters) with specific Course Codes and Topics.
+- **Integrated Learning Resources**: Every generated topic includes real-world resources (Videos, Blogs, Docs) to jumpstart the learning process.
+- **Forged Archive**: A personal history of all generated curricula, allowing users to revisit and export any previous work.
+- **Industry Mapping**: Automatically generates OBE outcomes, potential job roles, and capstone project ideas.
 
-🛠️ Tech Stack
-Layer	Technology
-Frontend	Vite, HTML, CSS, JavaScript
-AI Model	Google Gemini API
-Environment	Node.js
-Version Control	Git & GitHub
-📂 Project Structure
-CurricuForge/
-│
-├── public/                # Static assets
-├── src/
-│   ├── components/        # UI components
-│   ├── services/          # API integration
-│   ├── styles/            # CSS files
-│   └── main.js             # App entry point
-│
-├── .env                   # Environment variables (not committed)
-├── .gitignore
-├── index.html
-├── package.json
-└── README.md
+## 🛠️ Setup Instructions
 
-🔑 Environment Setup (IMPORTANT)
+1. **Clone the repository** and navigate to the project root.
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Configure Environment Variables**:
+   Create a `.env` file and add your Gemini API Key:
+   ```env
+   VITE_GEMINI_API_KEY=your_google_ai_key_here
+   ```
+4. **Launch Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-Create a .env file in the root folder:
-
-VITE_GEMINI_API_KEY=your_api_key_here
-
-
-⚠️ Do NOT add semicolons
-⚠️ Do NOT commit .env to GitHub
-
-Make sure .env is added to .gitignore.
-
-🧠 Using Gemini API in Vite
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-
-
-Vite only exposes environment variables prefixed with VITE_.
-
-▶️ How to Run the Project
-1️⃣ Clone the repository
-git clone https://github.com/your-username/CurricuForge.git
-
-2️⃣ Navigate to project folder
-cd CurricuForge
-
-3️⃣ Install dependencies
-npm install
-
-4️⃣ Start development server
-npm run dev
-
-
-The app will run on:
-
-http://localhost:5173
-
-📦 Build for Production
-npm run build
-
-
-Output will be generated inside the dist/ folder.
-
-🔐 Security Best Practices
-
-❌ Never expose API keys in frontend code
-
-❌ Never push .env files to GitHub
-
-✅ Restrict Gemini API key in Google Cloud Console
-
-✅ Use backend proxy (Flask / Node) for production apps
-
-📌 Future Enhancements
-
-🔐 User authentication
-
-📄 PDF curriculum export
-
-🧾 Save & manage generated curricula
-
-🧠 Multi-model AI support
-
-🌍 Cloud deployment
-
-👨‍💻 Author
-
-Shiva
-📧 Email: shivadashmisthry26@gmail.com
-
-⭐ Support
-
-If you like this project, please ⭐ star the repository and share it!
+---
+*Forged with 💎 and AI for the next generation of learners.*

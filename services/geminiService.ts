@@ -2,7 +2,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Curriculum, DurationType, Quiz } from "../types";
 
-// Always use process.env.API_KEY directly as a named parameter for initialization.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateCurriculum = async (
@@ -17,11 +16,15 @@ export const generateCurriculum = async (
   
   The curriculum must be divided into ${durationValue} periods, labeled as "${durationType.slice(0, -1)} 1", "${durationType.slice(0, -1)} 2", etc.
   Each period should contain 1-2 courses. Each course must have 3-5 specific topics.
+  
+  CRITICAL: 
+  1. Assign a difficulty level ('Easy', 'Medium', or 'Hard') to EACH topic based on complexity.
+  2. For each topic, provide 2-3 high-quality educational resources. 
+  
   Include 3-5 OBE outcomes, 3-5 potential job roles, and 1-2 capstone projects.`;
 
-  // Use gemini-3-pro-preview for complex reasoning tasks like curriculum generation.
   const response = await ai.models.generateContent({
-    model: "gemini-3-pro-preview",
+    model: "gemini-3-flash-preview", // Switched to Flash for speed
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -51,9 +54,22 @@ export const generateCurriculum = async (
                           properties: {
                             id: { type: Type.STRING },
                             title: { type: Type.STRING },
-                            description: { type: Type.STRING }
+                            description: { type: Type.STRING },
+                            difficulty: { type: Type.STRING, enum: ["Easy", "Medium", "Hard"] },
+                            resources: {
+                              type: Type.ARRAY,
+                              items: {
+                                type: Type.OBJECT,
+                                properties: {
+                                  type: { type: Type.STRING, enum: ["video", "article", "blog", "documentation"] },
+                                  title: { type: Type.STRING },
+                                  url: { type: Type.STRING }
+                                },
+                                required: ["type", "title", "url"]
+                              }
+                            }
                           },
-                          required: ["id", "title", "description"]
+                          required: ["id", "title", "description", "difficulty", "resources"]
                         }
                       }
                     },
@@ -73,7 +89,6 @@ export const generateCurriculum = async (
     }
   });
 
-  // Extract the text output using the .text property (not a method).
   const data = JSON.parse(response.text || '{}');
   return {
     ...data,
@@ -87,9 +102,8 @@ export const generateQuizForTopic = async (topicTitle: string): Promise<Quiz> =>
   Each question must have exactly 4 options.
   Include the correct answer index (0-3) and a brief explanation.`;
 
-  // Use gemini-3-pro-preview for high-quality quiz content generation.
   const response = await ai.models.generateContent({
-    model: "gemini-3-pro-preview",
+    model: "gemini-3-flash-preview", // Switched to Flash for speed
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -116,6 +130,5 @@ export const generateQuizForTopic = async (topicTitle: string): Promise<Quiz> =>
     }
   });
 
-  // Extract the text output using the .text property.
   return JSON.parse(response.text || '{}') as Quiz;
 };

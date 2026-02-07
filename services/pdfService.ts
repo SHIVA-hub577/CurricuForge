@@ -82,42 +82,60 @@ const renderCurriculum = (doc: jsPDF, curriculum: Curriculum, index?: number) =>
         
         doc.setFontSize(10);
         doc.setTextColor(51, 65, 85);
-        const topicLine = `${tIdx + 1}. ${topic.title}: ${topic.description}`;
+        const diffText = topic.difficulty ? ` [${topic.difficulty}]` : '';
+        const topicLine = `${tIdx + 1}. ${topic.title}${diffText}: ${topic.description}`;
         const splitTopic = doc.splitTextToSize(topicLine, pageWidth - 32);
         doc.text(splitTopic, 18, currentY);
         currentY += (splitTopic.length * 5) + 3;
 
+        // Render Resources if available
+        if (topic.resources && topic.resources.length > 0) {
+          doc.setFontSize(8);
+          doc.setTextColor(100, 116, 139);
+          doc.text(`Learning Resources:`, 22, currentY);
+          currentY += 4;
+          
+          topic.resources.forEach(res => {
+            if (currentY > 280) { doc.addPage(); currentY = 20; }
+            doc.setFontSize(7);
+            doc.setTextColor(2, 132, 199);
+            doc.text(`- [${res.type.toUpperCase()}] ${res.title}: ${res.url}`, 25, currentY, { maxWidth: pageWidth - 40 });
+            currentY += 4;
+          });
+          currentY += 2;
+        }
+
         // Render Quiz if available
         if (topic.quiz) {
           currentY += 2;
-          doc.setFontSize(10);
+          doc.setFontSize(9);
           doc.setTextColor(16, 185, 129); // emerald-500
-          doc.text(`> Assessment Questions Available:`, 22, currentY);
+          doc.text(`> Assessment Questions:`, 22, currentY);
           currentY += 5;
           
           topic.quiz.questions.forEach((q, qIdx) => {
             if (currentY > 250) { doc.addPage(); currentY = 20; }
             
-            doc.setFontSize(9);
+            doc.setFontSize(8);
             doc.setTextColor(30, 41, 59);
             const qText = `Q${qIdx + 1}: ${q.question}`;
             const splitQ = doc.splitTextToSize(qText, pageWidth - 45);
             doc.text(splitQ, 25, currentY);
-            currentY += (splitQ.length * 4.5);
+            currentY += (splitQ.length * 4);
 
             q.options.forEach((opt, oIdx) => {
               if (currentY > 270) { doc.addPage(); currentY = 20; }
               const isCorrect = oIdx === q.correctAnswer;
               doc.setTextColor(isCorrect ? 16 : 100, isCorrect ? 185 : 116, isCorrect ? 129 : 139);
               doc.text(`${String.fromCharCode(65 + oIdx)}) ${opt}${isCorrect ? ' [CORRECT]' : ''}`, 30, currentY);
-              currentY += 4.5;
+              currentY += 4;
             });
 
             if (currentY > 270) { doc.addPage(); currentY = 20; }
-            doc.setFontSize(8);
+            doc.setFontSize(7);
             doc.setTextColor(100, 116, 139);
             doc.text(`Explanation: ${q.explanation}`, 30, currentY, { maxWidth: pageWidth - 60 });
-            currentY += 10;
+            currentY += 8;
           });
           currentY += 5;
         }

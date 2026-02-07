@@ -7,12 +7,22 @@ export enum DurationType {
 }
 
 export type UserRole = 'student' | 'teacher';
+export type DifficultyLevel = 'Easy' | 'Medium' | 'Hard';
+
+export interface Resource {
+  type: 'video' | 'article' | 'blog' | 'documentation';
+  title: string;
+  url: string;
+}
 
 export interface Topic {
   id: string;
   title: string;
   description: string;
-  quiz?: Quiz; // Persist generated quiz here
+  difficulty: DifficultyLevel;
+  quiz?: Quiz;
+  resources?: Resource[];
+  isCompleted?: boolean;
 }
 
 export interface Course {
